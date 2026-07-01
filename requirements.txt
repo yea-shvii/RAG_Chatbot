@@ -1,0 +1,12 @@
+groq
+langchain-groq
+bs4
+beautifulsoup4
+streamlit
+langchain==0.3.27
+langchain-community==0.3.27
+faiss-cpu
+langchain-core==0.3.74
+python-dotenv
+langchain-ollama
+langchain-text-splitters
