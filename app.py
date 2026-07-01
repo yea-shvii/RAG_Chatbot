@@ -15,9 +15,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 
-# ----------------------------
-# Load Environment Variables
-# ----------------------------
 load_dotenv()
 
 groq_api_key = os.getenv("GROQ_API_KEY")
@@ -25,10 +22,7 @@ groq_api_key = os.getenv("GROQ_API_KEY")
 if not groq_api_key:
     st.error("GROQ_API_KEY not found in .env")
     st.stop()
-
-# ----------------------------
-# Streamlit Configuration
-# ----------------------------
+    
 st.set_page_config(
     page_title="Groq RAG Chatbot",
     page_icon="🤖"
@@ -36,9 +30,6 @@ st.set_page_config(
 
 st.title("🤖 ChatBot")
 
-# ----------------------------
-# Build Vector Store (Only Once)
-# ----------------------------
 if "vectors" not in st.session_state:
 
     with st.spinner("Loading documents..."):
@@ -67,17 +58,11 @@ if "vectors" not in st.session_state:
 
         st.session_state.vectors = vectors
 
-# ----------------------------
-# Initialize Groq LLM
-# ----------------------------
 llm = ChatGroq(
     groq_api_key=groq_api_key,
     model_name="llama-3.3-70b-versatile"
 )
 
-# ----------------------------
-# Prompt Template
-# ----------------------------
 prompt = ChatPromptTemplate.from_template(
     """
 Answer the question ONLY from the provided context.
